@@ -1,0 +1,42 @@
+pasta é apenas organização física, o que define 'camada' é quem chama quem
+
+O controller recebe uma requisição e delega para a camada responsável
+	- agnóstica a evento: não sabe que está sendo chamado por exemplo a partir de um API Gateway
+
+
+pasta application teremos o código da aplicação, que não tem dependência ou relação com serviços externos, como framework
+
+pasta contratos: tipagens criadas manualmente
+
+pasta main é a porta de entrada da aplicação (por exemplo, onde sobe o servidor)
+
+pasta functions vai ficar com as funções lambda
+
+
+
+Ainda sobre o adapter, a lógica do JSON.stringify só é necessária para o Lambda, mas no fastify, express, nest não precisamos. Então o controller não precisa se preocupar
+com o serviço externo, essa função é desacoplada para o adapter
+
+
+controller revebe a request, valida se está tudo certo, e chama o usecase, que devolve os dados.
+A regra de negocio fica isolada nos usecases
+usecases - funcionalidades da aplicação que simplesmente recebem um input de dados e devolvem um output ( por exemplo create-meal )
+
+
+
+
+
+
+
+
+
+comandos:
+
+serverless deploy (deploy tudo)
+
+serverless deploy function -f hello (deploy função hello apenas)
+
+serverless logs -f hello -t pega o tail do log da função no cloudwatch
+
+
+assistir aulas 59 sobre inversion of control, dependency injection e dependency inversion

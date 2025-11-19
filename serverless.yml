@@ -1,0 +1,29 @@
+org: pedroarnold
+service: foodiary-api
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: sa-east-1
+  memorySize: 128
+
+package:
+  individually: true
+
+build:
+  esbuild:
+    bundle: true
+    minify: true
+    sourcemap: false
+    exclude:
+      - '@aws-sdk/*'
+    external:
+      - '@aws-sdk/*'
+
+functions:
+  hello:
+    handler: src/main/functions/hello.handler
+    events:
+      - httpApi:
+          path: /hello/{id}
+          method: POST
