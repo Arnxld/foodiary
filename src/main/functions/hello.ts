@@ -1,12 +1,11 @@
-
-import { HelloController } from '@application/controllers/HelloController';
-import { HelloUseCase } from '@application/usecases/HelloUseCase';
-import { lambdaHttpAdapter } from '@main/adapters/lambdaHttpAdapter';
 import 'reflect-metadata';
 
+import { lambdaHttpAdapter } from '@main/adapters/lambdaHttpAdapter';
+import { HelloController } from '@application/controllers/HelloController'
+import { Registry } from '@kernel/di/Registry';
 // whatever is outside the function, it will be only executed once aws executes the container
 
-const controller = new HelloController(new HelloUseCase());
+const controller = Registry.getInstance().resolve(HelloController)
 
 export const handler = lambdaHttpAdapter(controller);
 
