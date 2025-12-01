@@ -4,13 +4,29 @@ O controller recebe uma requisição e delega para a camada responsável
 	- agnóstica a evento: não sabe que está sendo chamado por exemplo a partir de um API Gateway
 
 
-pasta application teremos o código da aplicação, que não tem dependência ou relação com serviços externos, como framework
+pasta application teremos o código da aplicação, que não tem dependência ou relação com serviços externos, como framework, gateways, bancos de dados, serviços de autenticação....
+
+pasta kernel são funcionamentos do framework: decorators, schema, registry, container di...
 
 pasta contratos: tipagens criadas manualmente
 
 pasta main é a porta de entrada da aplicação (por exemplo, onde sobe o servidor)
 
 pasta functions vai ficar com as funções lambda
+
+pasta shared são códigos compartilhados entre as camadas: usecases, kernel, main, etc.
+
+pasta infra vai ter implementações com serviços externos: DBs, Gateways, Filas, Arquivos, etc.
+
+
+
+aula 53 - login social cognito (comentado em 2:18 da live 4)
+aula 2 - JWT (comentado em 2:27 da live 4)
+
+
+GS2 foi excluido do DB -> 2:47
+
+
 
 
 
@@ -40,3 +56,6 @@ serverless logs -f hello -t pega o tail do log da função no cloudwatch
 
 
 assistir aulas 59 sobre inversion of control, dependency injection e dependency inversion
+
+
+serverless framework aula 65
