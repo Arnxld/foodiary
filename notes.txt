@@ -1,5 +1,7 @@
 pasta é apenas organização física, o que define 'camada' é quem chama quem
 
+estar no plano essentials do cognito (customização de access tokens)
+
 O controller recebe uma requisição e delega para a camada responsável
 	- agnóstica a evento: não sabe que está sendo chamado por exemplo a partir de um API Gateway
 
@@ -52,10 +54,22 @@ serverless deploy (deploy tudo)
 
 serverless deploy function -f hello (deploy função hello apenas)
 
-serverless logs -f hello -t pega o tail do log da função no cloudwatch
+serverless remove para remover tudo criado
+
+serverless logs -f hello -t : uma vez deployado, esse comando permite streamar os logs da função
 
 
 assistir aulas 59 sobre inversion of control, dependency injection e dependency inversion
 
 
 serverless framework aula 65
+
+
+serverless package para gerar um template
+
+
+
+sobre autenticação e planos de assinatura, olhar comentario em 55min da live 5
+
+
+**** caso dê erro no GetTokensFromRefreshTokenCommand, olhar live 05 a partir de 2:40

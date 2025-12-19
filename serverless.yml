@@ -7,9 +7,17 @@ provider:
   region: sa-east-1
   memorySize: 128
   stage: ${opt:stage, 'dev'}
-  environment:  ${file(./sls/config/env.yml)}
+  environment: ${file(./sls/config/env.yml)}
   iam:
     role: ${file(./sls/config/role.yml)}
+  httpApi:
+    authorizers:
+      CognitoAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authrization
+        issuerUrl: !GetAtt UserPool.ProviderUrl
+        audience:
+          - !Ref UserPoolClient
 
 package:
   individually: true
@@ -21,11 +29,10 @@ custom:
 build:
   esbuild:
     configFile: ./esbuild.config.mjs
-    
 
 functions:
-  - ${file(./sls/function/auth.yml)}
-  
+  - ${file(./sls/functions/auth.yml)}
+  - ${file(./sls/functions/meals.yml)}
 
 resources:
   - ${file(./sls/resources/UserPool.yml)}

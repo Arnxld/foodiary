@@ -1,11 +1,11 @@
 Resources:
   UserPool:
-    Type: AWS::Cognite::UserPool
-    Properties: 
+    Type: AWS::Cognito::UserPool
+    Properties:
       UserPoolName: ${self:custom.cognito.PoolName}
-      DeletionProtection: ACTIVE
+      # DeletionProtection: ACTIVE
       MfaConfiguration: OFF
-      AutoverifiedAttributes:
+      AutoVerifiedAttributes:
         - email
       AdminCreateUserConfig:
         AllowAdminCreateUserOnly: false
@@ -15,21 +15,45 @@ Resources:
         RecoveryMechanisms:
           - Name: verified_email
             Priority: 1
+      Schema:
+        - Name: internalId
+          Required: false
+          Mutable: false
+          AttributeDataType: String
       Policies:
         PasswordPolicy:
           MinimumLength: 8
-          RequiredLowercase: false
-          RequireNumbers: false 
-          RequireSymbols: false 
-          RequireUppercase: false 
+          RequireLowercase: false
+          RequireNumbers: false
+          RequireSymbols: false
+          RequireUppercase: false
+      LambdaConfig:
+        PreTokenGenerationConfig:
+          LambdaArn: !Sub 'arn:aws:lamda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-preTokenGenerationTrigger'
+          LambdaVersion: V2_0
+
+  PreTokenGenerationLambdaPermission:
+    Type: AWS::Lambda::Permission
+    DependsOn: PreTokenGenerationTriggerLambdaFunction
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Sub 'arn:aws:lamda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-preTokenGenerationTrigger'
+      Principal: cognito-idp.amazonaws.com
+      SourceArn: !GetAtt UserPool.Arn
+
+
+
   UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
       ClientName: ${self:service}=${self:provider.stage}-UserPoolClient
       UserPoolId: !Ref UserPool
       GenerateSecret: true
       ExplicitAuthFlows:
         - ALLOW_USER_PASSWORD_AUTH
       TokenValidityUnits:
-        AccessToken: 12
+        AccessToken: hours
+      AccessTokenValidity: 12
       RefreshTokenRotation:
         Feature: ENABLED
         RetryGracePeriodSeconds: 0

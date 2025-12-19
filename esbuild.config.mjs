@@ -1,4 +1,4 @@
-import esbuildPluginTsc from "esbuild-plugin-tsc";
+import esbuildPluginTsc from 'esbuild-plugin-tsc';
 
 export default (serverless) => ({
     bundle: true,
@@ -6,5 +6,5 @@ export default (serverless) => ({
     sourcemap: false,
     exclude: ['@aws-sdk/*'],
     external: ['@aws-sdk/*'],
-    plugins: [esbuildPluginTsc()]
-})
+    plugins: [esbuildPluginTsc()],
+});

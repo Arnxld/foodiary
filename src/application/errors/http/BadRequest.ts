@@ -6,7 +6,7 @@ export class BadRequest extends HttpError {
 
   public override code: ErrorCode;
 
-  constuctor(message?: any, code?: ErrorCode) {
+  constructor(message?: any, code?: ErrorCode) {
     super();
 
     this.name = 'BadRequest';

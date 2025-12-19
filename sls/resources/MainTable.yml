@@ -4,19 +4,19 @@ Resources:
     Properties:
       TableName: ${self:service}-${self:provider.stage}-MainTable
       BillingMode: PAY_PER_REQUEST
-      DeletionProtectionMode: true
+      # DeletionProtectionEnabled: true
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: true
         RecoveryPeriodInDays: 35
       AttributeDefinitions:
         - AttributeName: PK
-        - AttributeType: S
+          AttributeType: S
         - AttributeName: SK
-        - AttributeType: S
-        - AttributeName: GS1PK
-        - AttributeType: S
-        - AttributeName: GS1SK
-        - AttributeType: S
+          AttributeType: S
+        - AttributeName: GSI1PK
+          AttributeType: S
+        - AttributeName: GSI1SK
+          AttributeType: S
       KeySchema:
         - AttributeName: PK
           KeyType: HASH

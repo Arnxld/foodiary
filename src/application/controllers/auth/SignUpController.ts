@@ -6,22 +6,22 @@ import { Injectable } from '@kernel/decorators/Injectable';
 
 @Injectable()
 @Schema(signUpSchema)
-export class SignUpController extends Controller<SignUpController.Reponse> {
-  
+export class SignUpController extends Controller<'public', SignUpController.Reponse> {
+
   constructor(private readonly signUpUseCase: SignUpUseCase) { // injeção de dependência ( ao invés de criar o UseCase dentro da classe)
     super();
   }
 
-  protected override async handle({ body }: Controller.Request<SignUpBody>): Promise<Controller.Response<SignUpController.Reponse>> {
+  protected override async handle({ body }: Controller.Request<'public', SignUpBody>): Promise<Controller.Response<SignUpController.Reponse>> {
     const { account } = body;
 
-    const { accessToken, refreshToken } = await this.signUpUseCase.execute(account)
+    const { accessToken, refreshToken } = await this.signUpUseCase.execute(account);
 
     return {
       statusCode: 201,
       body: {
         accessToken,
-        refreshToken
+        refreshToken,
       },
     };
   }
