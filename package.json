@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:email": "email dev --dir src/infra/emails",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
@@ -13,11 +13,15 @@
   "packageManager": "pnpm@10.20.0",
   "devDependencies": {
     "@eslint/js": "^9.38.0",
+    "@react-email/preview-server": "5.1.0",
     "@types/aws-lambda": "^8.10.157",
     "@types/node": "^24.9.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "esbuild-plugin-tsc": "^0.5.0",
     "eslint": "^9.38.0",
     "globals": "^16.4.0",
+    "react-email": "^5.1.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2"
   },
@@ -25,7 +29,17 @@
     "@aws-sdk/client-cognito-identity-provider": "^3.940.0",
     "@aws-sdk/client-dynamodb": "^3.940.0",
     "@aws-sdk/lib-dynamodb": "^3.940.0",
+    "@react-email/column": "^0.0.13",
+    "@react-email/heading": "^0.0.15",
+    "@react-email/html": "^0.0.11",
+    "@react-email/render": "^2.0.0",
+    "@react-email/row": "^0.0.12",
+    "@react-email/section": "^0.0.16",
+    "@react-email/tailwind": "^2.0.2",
+    "@react-email/text": "^0.1.5",
     "ksuid": "^3.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "reflect-metadata": "^0.2.2",
     "zod": "3.25.16"
   }

@@ -73,3 +73,7 @@ sobre autenticação e planos de assinatura, olhar comentario em 55min da live 5
 
 
 **** caso dê erro no GetTokensFromRefreshTokenCommand, olhar live 05 a partir de 2:40
+
+
+Custom Domain Name - live 06 a partir de 2:15:00
+  
